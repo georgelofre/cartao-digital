@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>George Lopes | Advogado - Cartão Digital</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Montserrat & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              900: '#0B1120',
+              800: '#0F172A',
+              700: '#1E293B',
+            },
+            gold: {
+              400: '#DFB971',
+              500: '#C5A059',
+              600: '#A37F3C',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Estilos Customizados & Efeitos Glassmorphism */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #070B14;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(197, 160, 89, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(15, 23, 42, 0.8) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(197, 160, 89, 0.2);
+    }
+
+    .glass-button {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-button:hover {
+      background: rgba(197, 160, 89, 0.12);
+      border-color: rgba(197, 160, 89, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF 30%, #DFB971 70%, #C5A059 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gold-glow {
+      box-shadow: 0 0 25px rgba(197, 160, 89, 0.25);
+    }
+
+    .whatsapp-btn {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      transition: all 0.25s ease;
+    }
+
+    .whatsapp-btn:hover {
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* Animação de Entrada */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-in {
+      animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Pulse suave no distintivo */
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.02); }
+    }
+
+    .badge-pulse {
+      animation: subtlePulse 3s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-100 flex flex-col justify-between items-center p-4 sm:p-6">
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-slate-900/95 text-slate-100 border border-gold-500/40 px-5 py-3 rounded-xl shadow-2xl backdrop-blur-md flex items-center gap-3 transition-all duration-300 opacity-0 pointer-events-none transform -translate-y-4">
+    <i class="fa-solid fa-circle-check text-gold-500 text-lg"></i>
+    <span id="toast-message" class="text-sm font-medium">Link copiado com sucesso!</span>
+  </div>
+
+  <!-- Container Central Otimizado para Mobile e Desktop -->
+  <main class="w-full max-w-md my-auto animate-fade-in">
+    
+    <!-- Cartão Principal (Glassmorphism) -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+      
+      <!-- Detalhes de iluminação no fundo da card -->
+      <div class="absolute -top-24 -right-24 w-48 h-48 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-navy-800/80 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Topo: Monograma Logo GL -->
+      <div class="flex flex-col items-center text-center mb-6">
+        <div class="relative group cursor-pointer mb-4" onclick="openQrModal()">
+          <!-- Borda Hexagonal/Circular Dourada -->
+          <div class="w-24 h-24 rounded-full border-2 border-gold-500/60 p-1 flex items-center justify-center relative bg-navy-900/80 gold-glow transition-all duration-300 group-hover:scale-105 group-hover:border-gold-400">
+            <div class="w-full h-full rounded-full border border-gold-500/30 flex items-center justify-center bg-gradient-to-br from-navy-800 to-navy-900">
+              <span class="font-display font-extrabold text-3xl tracking-wider gold-gradient-text">GL</span>
+            </div>
+            <!-- Ícone flutuante de QR Code -->
+            <div class="absolute bottom-0 right-0 bg-gold-500 text-navy-900 w-7 h-7 rounded-full flex items-center justify-center text-xs shadow-lg font-bold transition-transform duration-300 group-hover:scale-110">
+              <i class="fa-solid fa-qrcode"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nome e Sobrenome -->
+        <h1 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-1">
+          George Lopes <span class="text-gold-500 font-light">| Advogado</span>
+        </h1>
+        
+        <!-- Tagline Oficial -->
+        <p class="text-xs sm:text-sm text-slate-300 font-medium tracking-wide mb-3">
+          Advocacia Estratégica e Soluções Jurídicas
+        </p>
+
+        <!-- Badge Atendimento Personalizado -->
+        <div class="badge-pulse inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span>
+          <span>🤝 Atendimento Personalizado</span>
+        </div>
+      </div>
+
+      <!-- Divisor Elegante -->
+      <div class="h-px w-full bg-gradient-to-r from-transparent via-gold-500/30 to-transparent my-6"></div>
+
+      <!-- BOTÕES DE AÇÃO INTERATIVOS -->
+      <div class="space-y-3.5">
+        
+        <!-- 1. WhatsApp Primary CTA (Camila IA / Atendimento) -->
+        <a href="https://wa.me/5585996596675?text=Ol%C3%A1%2C%20Dr.%20George!%20Gostaria%20de%20iniciar%20um%20atendimentos%20jur%C3%ADdico." 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="whatsapp-btn w-full py-4 px-5 rounded-2xl flex items-center justify-between text-white font-semibold shadow-lg text-sm group">
+          <div class="flex items-center gap-3.5">
+            <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-lg">
+              <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <div class="text-left">
+              <span class="block text-xs text-emerald-200 font-normal">Triagem Rápida no WhatsApp</span>
+              <span class="block text-base tracking-wide font-bold">Falar no WhatsApp</span>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-xs opacity-70 transition-transform group-hover:translate-x-1"></i>
+        </a>
+
+        <!-- 2. Localização (Fortaleza - CE) -->
+        <button onclick="openLocationModal()" 
+                class="glass-button w-full py-3.5 px-4 rounded-2xl flex items-center justify-between text-slate-200 font-medium text-sm group">
+          <div class="flex items-center gap-3.5">
+            <div class="w-9 h-9 rounded-xl bg-gold-500/10 border border-gold-500/20 text-gold-400 flex items-center justify-center text-base">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="text-left">
+              <span class="block text-xs text-slate-400">Atendimento em Fortaleza / CE</span>
+              <span class="block text-sm font-semibold text-white">Localização do Escritório</span>
+            </div>
+          </div>
+          <i class="fa-solid fa-angle-right text-xs text-slate-400 transition-transform group-hover:translate-x-1"></i>
+        </button>
+
+        <!-- 3. Enviar E-mail -->
+        <a href="mailto:contato@georgelopes.adv.br?subject=Consulta%20Jur%C3%ADdica%20-%20Contato%20pelo%20Cart%C3%A3o%20Digital" 
+           class="glass-button w-full py-3.5 px-4 rounded-2xl flex items-center justify-between text-slate-200 font-medium text-sm group">
+          <div class="flex items-center gap-3.5">
+            <div class="w-9 h-9 rounded-xl bg-gold-500/10 border border-gold-500/20 text-gold-400 flex items-center justify-center text-base">
+              <i class="fa-regular fa-envelope"></i>
+            </div>
+            <div class="text-left">
+              <span class="block text-xs text-slate-400">Contato Oficial</span>
+              <span class="block text-sm font-semibold text-white">Enviar E-mail</span>
+            </div>
+          </div>
+          <i class="fa-solid fa-angle-right text-xs text-slate-400 transition-transform group-hover:translate-x-1"></i>
+        </a>
+
+        <!-- 4. Salvar Contato (.vCard) -->
+        <button onclick="downloadVCard()" 
+                class="glass-button w-full py-3.5 px-4 rounded-2xl flex items-center justify-between text-slate-200 font-medium text-sm group">
+          <div class="flex items-center gap-3.5">
+            <div class="w-9 h-9 rounded-xl bg-gold-500/10 border border-gold-500/20 text-gold-400 flex items-center justify-center text-base">
+              <i class="fa-solid fa-address-book"></i>
+            </div>
+            <div class="text-left">
+              <span class="block text-xs text-slate-400">Adicionar à Agenda do Celular</span>
+              <span class="block text-sm font-semibold text-white">Salvar Contato (vCard)</span>
+            </div>
+          </div>
+          <i class="fa-solid fa-download text-xs text-gold-400 transition-transform group-hover:translate-y-0.5"></i>
+        </button>
+
+        <!-- 5. Compartilhar Cartão -->
+        <button onclick="shareCard()" 
+                class="glass-button w-full py-3.5 px-4 rounded-2xl flex items-center justify-between text-slate-200 font-medium text-sm group">
+          <div class="flex items-center gap-3.5">
+            <div class="w-9 h-9 rounded-xl bg-gold-500/10 border border-gold-500/20 text-gold-400 flex items-center justify-center text-base">
+              <i class="fa-solid fa-share-nodes"></i>
+            </div>
+            <div class="text-left">
+              <span class="block text-xs text-slate-400">Enviar para um Cliente ou Colega</span>
+              <span class="block text-sm font-semibold text-white">Compartilhar Cartão</span>
+            </div>
+          </div>
+          <i class="fa-regular fa-copy text-xs text-slate-400"></i>
+        </button>
+
+      </div>
+
+      <!-- Rodapé do Cartão com QR Code secundário -->
+      <div class="mt-8 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+        <span class="flex items-center gap-1.5">
+          <i class="fa-solid fa-shield-halved text-gold-500/80"></i>
+          OAB/CE • Advocacia
+        </span>
+        <button onclick="openQrModal()" class="text-gold-400 hover:text-gold-300 transition-colors font-medium flex items-center gap-1">
+          <i class="fa-solid fa-qrcode text-xs"></i>
+          Ver QR Code
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Direitos / Assinatura -->
+    <p class="text-center text-xs text-slate-500 mt-6 font-light">
+      © <span id="year"></span> George Lopes | Advogado. Todos os direitos reservados.
+    </p>
+
+  </main>
+
+  <!-- MODAL: QR Code para Escaneamento -->
+  <div id="qr-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="glass-card max-w-xs w-full rounded-3xl p-6 text-center border-gold-500/40 transform scale-95 transition-transform duration-300" id="qr-modal-card">
+      
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="font-display text-lg font-bold text-white">QR Code do Cartão</h3>
+        <button onclick="closeQrModal()" class="text-slate-400 hover:text-white w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl shadow-inner inline-block mb-4 border-2 border-gold-500/40">
+        <img id="qr-image" src="" alt="QR Code George Lopes Advogado" class="w-48 h-48 mx-auto">
+      </div>
+
+      <p class="text-xs text-slate-300 mb-4">
+        Aponte a câmera do celular para abrir o cartão digital instantaneamente.
+      </p>
+
+      <button onclick="closeQrModal()" class="w-full py-2.5 rounded-xl bg-gold-500 text-navy-900 font-bold text-xs uppercase tracking-wider hover:bg-gold-400 transition-colors">
+        Fechar
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL: Localização (Fortaleza - CE) -->
+  <div id="location-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="glass-card max-w-sm w-full rounded-3xl p-6 text-center border-gold-500/40 transform scale-95 transition-transform duration-300" id="location-modal-card">
+      
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="font-display text-lg font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-location-dot text-gold-500"></i> Localização
+        </h3>
+        <button onclick="closeLocationModal()" class="text-slate-400 hover:text-white w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="bg-navy-900/90 rounded-2xl p-4 border border-slate-700/60 text-left mb-5">
+        <span class="block text-xs text-gold-400 font-semibold mb-1 uppercase tracking-wider">Atendimento Presencial e Digital</span>
+        <h4 class="text-white font-bold text-base mb-1">Fortaleza - Ceará</h4>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Atendimentos presenciais mediante agendamento prévio. Atendimentos virtuais em todo o Brasil.
+        </p>
+      </div>
+
+      <div class="space-y-2">
+        <a href="https://maps.google.com/?q=Fortaleza+CE+Brasil" 
+           target="_blank" 
+           class="w-full py-3 rounded-xl bg-gold-500 text-navy-900 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-gold-400 transition-colors">
+          <i class="fa-solid fa-map-location-dot"></i>
+          Abrir no Google Maps
+        </a>
+        <button onclick="closeLocationModal()" class="w-full py-2.5 rounded-xl bg-slate-800 text-slate-300 font-semibold text-xs hover:bg-slate-700 transition-colors">
+          Voltar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCRIPT DE INTERAÇÕES -->
+  <script>
+    // Atualiza ano atual
+    document.getElementById('year').innerText = new Date().getFullYear();
+
+    // 1. Geração de arquivo vCard (.vcf)
+    function downloadVCard() {
+      const vcardData = `BEGIN:VCARD
+VERSION:3.0
+FN:George Lopes | Advogado
+N:Lopes;George;;;
+TITLE:Advogado
+ORG:George Lopes Advocacia Estratégica
+TEL;TYPE=CELL,VOICE;TYPE=PREF:+5585996596675
+EMAIL;TYPE=INTERNET:contato@georgelopes.adv.br
+ADR;TYPE=WORK:;;Fortaleza;CE;;Brasil
+NOTE:Advocacia Estratégica e Soluções Jurídicas. Atendimento Personalizado.
+URL:${window.location.href}
+END:VCARD`;
+
+      const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'George_Lopes_Advogado.vcf');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      showToast('Contato pronto para salvar na sua agenda!');
+    }
+
+    // 2. Compartilhar Cartão (Copia Link)
+    function shareCard() {
+      const cardUrl = window.location.href;
+      
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(cardUrl).then(() => {
+          showToast('Link do cartão copiado com sucesso!');
+        }).catch(() => {
+          fallbackCopyTextToClipboard(cardUrl);
+        });
+      } else {
+        fallbackCopyTextToClipboard(cardUrl);
+      }
+    }
+
+    function fallbackCopyTextToClipboard(text) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.top = "0";
+      textArea.style.left = "0";
+      textArea.style.position = "fixed";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast('Link do cartão copiado!');
+      } catch (err) {
+        showToast('Copie este link: ' + text);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    // 3. Exibição do Toast
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      toastMsg.innerText = msg;
+      
+      toast.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'pointer-events-none', '-translate-y-4');
+      }, 3500);
+    }
+
+    // 4. Modal de QR Code
+    function openQrModal() {
+      const currentUrl = encodeURIComponent(window.location.href);
+      const qrApi = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${currentUrl}&color=0F172A&bgcolor=FFFFFF`;
+      document.getElementById('qr-image').src = qrApi;
+
+      const modal = document.getElementById('qr-modal');
+      const card = document.getElementById('qr-modal-card');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+    }
+
+    function closeQrModal() {
+      const modal = document.getElementById('qr-modal');
+      const card = document.getElementById('qr-modal-card');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    // 5. Modal de Localização
+    function openLocationModal() {
+      const modal = document.getElementById('location-modal');
+      const card = document.getElementById('location-modal-card');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+    }
+
+    function closeLocationModal() {
+      const modal = document.getElementById('location-modal');
+      const card = document.getElementById('location-modal-card');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+  </script>
+</body>
+</html>
